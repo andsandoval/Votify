@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:spotify_polls/models/song.dart';
-import 'package:spotify_polls/widgets/song_cards.dart';
-
-import 'package:spotify_polls/models/media_item.dart';
 import 'package:spotify_polls/widgets/media_item_list.dart';
 
 class SortSongs extends StatefulWidget {

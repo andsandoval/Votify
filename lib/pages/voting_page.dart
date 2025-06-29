@@ -61,7 +61,7 @@ class _VotingPageState extends State<VotingPage> {
     _votingSubscription = votingController.votingStream.listen((msg) {
       final data = jsonDecode(msg);
       
-      print("Voting Page received message: " + data.toString() + "::: end message");
+      print("Voting Page received message: " + ${data.toString()} + "::: end message");
       Poll updatedPoll = Poll.fromJson(data[0]);
       final index = polls.indexWhere((poll) => poll.pollId == updatedPoll.pollId);
       if (index != -1) {
