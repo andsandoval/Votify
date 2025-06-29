@@ -14,6 +14,7 @@ class VotingController with ChangeNotifier {
   final WebSocketService _pollWsService = WebSocketService();
   final WebSocketService _votingWsService = WebSocketService();
 
+  Stream<dynamic> get pollStream => _pollWsService.stream;
   Stream<dynamic> get votingStream => _votingWsService.stream;
 
   void connectSockets() {
@@ -33,7 +34,7 @@ class VotingController with ChangeNotifier {
       "pollId": pollId,
       "id": DateTime.now().millisecondsSinceEpoch.toString() // simple unique ID
     };
-    print("voting ws message sent: ${message}");
+    print("voting ws message sent: $message");
     _votingWsService.send(jsonEncode(message));
   }
 
