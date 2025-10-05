@@ -38,29 +38,29 @@ export default async function voteHandler(pollId, vote, access_token) {
             [pollId, userId, vote]
         )
 
-        const result = await pool.query(
-            `SELECT 
-                Polls.*, 
-                to_jsonb(Songs) AS song
-             FROM Polls
-             LEFT JOIN Songs ON Songs.song_id = Polls.song_id
-             WHERE poll_id = $1
-            `,
-            [pollId]
-        )
-        const songIds = result.rows.map((track) => track.song_id);
-        if (songIds.length == 0) {
-            return JSON.stringify([]);
-        }
-        const images = (await spotifyClient.getSongsById(songIds)).map((track) => track.imageUrl);
-        const realResult = result.rows.map((row, index) => ({
-            ...row,
-            song: {
-                ...row.song,
-                imageUrl: images[index]
-            }
-        }));
-        return JSON.stringify(realResult);
+        // const result = await pool.query(
+        //     `SELECT 
+        //         Polls.*, 
+        //         to_jsonb(Songs) AS song
+        //      FROM Polls
+        //      LEFT JOIN Songs ON Songs.song_id = Polls.song_id
+        //      WHERE poll_id = $1
+        //     `,
+        //     [pollId]
+        // )
+        // const songIds = result.rows.map((track) => track.song_id);
+        // if (songIds.length == 0) {
+        //     return JSON.stringify([]);
+        // }
+        // const images = (await spotifyClient.getSongsById(songIds)).map((track) => track.imageUrl);
+        // const realResult = result.rows.map((row, index) => ({
+        //     ...row,
+        //     song: {
+        //         ...row.song,
+        //         imageUrl: images[index]
+        //     }
+        // }));
+        // return JSON.stringify(realResult);
     } catch (error) {
         console.error(error);
         return "Error updating poll.";

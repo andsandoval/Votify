@@ -12,7 +12,8 @@ import '../models/poll.dart';
 import '../widgets/sort_songs.dart';
 
 class VotingPage extends StatefulWidget {
-  const VotingPage({super.key, this.title = "Voting Page", required this.playlistId});
+  const VotingPage(
+      {super.key, this.title = "Voting Page", required this.playlistId});
   final String playlistId;
   final String title;
 
@@ -25,9 +26,7 @@ class _VotingPageState extends State<VotingPage> {
   late Future<List<Poll>> _pollsFuture;
   late StreamSubscription _votingSubscription;
 
-  List<Song> get songs => polls.map((poll) =>
-      poll.song
-  ).toList();
+  List<Song> get songs => polls.map((poll) => poll.song).toList();
 
   final VotingController votingController = VotingController();
 
@@ -35,9 +34,7 @@ class _VotingPageState extends State<VotingPage> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return SortSongs(
-          songs: songs
-        );
+        return SortSongs(songs: songs);
       },
     );
   }
@@ -60,15 +57,16 @@ class _VotingPageState extends State<VotingPage> {
     _pollsFuture = votingController.getPolls(widget.playlistId);
     _votingSubscription = votingController.votingStream.listen((msg) {
       final data = jsonDecode(msg);
-      
-      print("Voting Page received message: " + ${data.toString()} + "::: end message");
-      Poll updatedPoll = Poll.fromJson(data[0]);
-      final index = polls.indexWhere((poll) => poll.pollId == updatedPoll.pollId);
-      if (index != -1) {
-        setState(() {
-          polls[index] = updatedPoll;
-        });
-      }
+
+      print("Voting Page received message: ${data.toString()} ::: end message");
+      // Poll updatedPoll = Poll.fromJson(data[0]);
+      // final index =
+      //     polls.indexWhere((poll) => poll.pollId == updatedPoll.pollId);
+      // if (index != -1) {
+      //   setState(() {
+      //     polls[index] = updatedPoll;
+      //   });
+      // }
     });
   }
 
@@ -104,7 +102,10 @@ class _VotingPageState extends State<VotingPage> {
                       } else {
                         return Padding(
                           padding: const EdgeInsets.all(12),
-                          child: Voting(polls: polls, votingController: votingController,),
+                          child: Voting(
+                            polls: polls,
+                            votingController: votingController,
+                          ),
                         );
                       }
                     } else {
@@ -112,14 +113,14 @@ class _VotingPageState extends State<VotingPage> {
                         child: Text("There are no songs to vote on."),
                       );
                     }
-                  }
-              ),
+                  }),
             ],
           ),
           Align(
             alignment: Alignment.center,
             child: Padding(
-                padding: EdgeInsets.fromLTRB(0, MediaQuery.sizeOf(context).height * 0.7, 0, 0) ,
+                padding: EdgeInsets.fromLTRB(
+                    0, MediaQuery.sizeOf(context).height * 0.7, 0, 0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -128,10 +129,8 @@ class _VotingPageState extends State<VotingPage> {
                       child: const Text("Sort Songs"),
                     )
                   ],
-                )
-            ),
+                )),
           )
-
         ],
       ),
       floatingActionButton: FloatingActionButton(

@@ -68,7 +68,6 @@ class VotingController with ChangeNotifier {
         }),
       );
 
-
       return response.status == 200;
     } catch (error, stackTrace) {
       print("Something went wrong while creating poll:");

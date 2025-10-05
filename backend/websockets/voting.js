@@ -75,7 +75,7 @@ pollPool.on('notification', (msg) => {
   console.log('Received NOTIFY:', payload);
 
   // Broadcast payload to all connected WebSocket clients
-  for (const client of pollClients) {
+  for (const client of votingClients) {
     if (client.readyState === 1) { // WebSocket.OPEN
       client.send(payload);
     }
