@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:spotify_polls/models/media_item.dart';
 import 'package:spotify_polls/models/poll.dart';
 import 'package:spotify_polls/models/song.dart';
 import 'package:spotify_polls/widgets/ring_chart.dart';
